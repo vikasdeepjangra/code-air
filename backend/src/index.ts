@@ -15,6 +15,10 @@ app.use(
 
 app.use(bodyParser.json());
 
+app.get("/", (req: express.Request, res: express.Response) => {
+  res.send("success");
+});
+
 app.get("/healthCheck", healthChecks);
 
 app.post("/compileAndRun", compileAndRun);
