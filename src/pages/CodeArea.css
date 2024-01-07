@@ -43,5 +43,11 @@
   border-left: 10px solid rgb(255, 93, 93);
   display: inline;
   color: white;
-  padding: 2vh;
+}
+
+.programOutput {
+  height: 8vh;
+  background-color: white;
+  color: #242424;
+  padding: 2vh 2vw;
 }

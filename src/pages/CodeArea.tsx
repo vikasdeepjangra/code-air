@@ -1,17 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Editor from "@monaco-editor/react";
 import "./CodeArea.css";
 import { HouseDoorFill } from "react-bootstrap-icons";
 import { Link, useParams } from "react-router-dom";
 import { supportedLanguages } from "./LanguageConfig";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function NavBar({
   selectedLanguage,
   onRunButtonClick,
+  isRunning,
 }: {
   selectedLanguage: string;
   onRunButtonClick: () => void;
+  isRunning: boolean;
 }) {
   return (
     <div id="navBar">
@@ -30,8 +33,9 @@ function NavBar({
           type="button"
           className="btn btn-primary btn-lg run-btn"
           onClick={onRunButtonClick}
+          disabled={isRunning}
         >
-          Run
+          {isRunning ? "Running..." : "Run"}
         </button>
       </div>
     </div>
@@ -40,6 +44,8 @@ function NavBar({
 
 function CodeArea() {
   const editorRef = useRef<any>(null);
+  const [terminalMessage, setTerminalMessage] = useState("Press Run Button!");
+  const [isRunning, setIsRunning] = useState(false);
   const { language } = useParams();
   const defaultConfig = supportedLanguages.find((languageConfig) => {
     if (languageConfig.languageCode === language) {
@@ -52,6 +58,8 @@ function CodeArea() {
   }
 
   const compileAndRun = async () => {
+    setIsRunning(true);
+    setTerminalMessage((terminalMsg) => (terminalMsg = "Loading..."));
     const code = editorRef.current?.getValue();
     const {
       language,
@@ -75,7 +83,9 @@ function CodeArea() {
       }),
     });
     const responseData = await response.json();
-    alert(responseData.message);
+    console.log(responseData);
+    setTerminalMessage((terminalMsg) => (terminalMsg = responseData.message));
+    setIsRunning(false);
   };
 
   return (
@@ -84,6 +94,7 @@ function CodeArea() {
         <NavBar
           selectedLanguage={defaultConfig?.language || ""}
           onRunButtonClick={compileAndRun}
+          isRunning={isRunning}
         />
         <Editor
           height="92vh"
@@ -93,7 +104,10 @@ function CodeArea() {
         />
       </div>
       <div className="code-terminal">
-        <h6>Loading...</h6>
+        <h5 className="programOutput d-flex align-items-center justify-content-center mb-3">
+          Program Output
+        </h5>
+        <pre className="ms-3">{terminalMessage}</pre>
       </div>
     </div>
   );
