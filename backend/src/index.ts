@@ -3,6 +3,7 @@ import http from "http";
 import bodyParser from "body-parser";
 import cors from "cors";
 import { compileAndRun } from "./controllers/CompileAndRun";
+import { healthChecks } from "./controllers/Healthcheck";
 const app = express();
 const port = 3300;
 
@@ -13,6 +14,8 @@ app.use(
 );
 
 app.use(bodyParser.json());
+
+app.get("/healthCheck", healthChecks);
 
 app.post("/compileAndRun", compileAndRun);
 
