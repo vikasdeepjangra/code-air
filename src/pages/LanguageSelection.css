@@ -1,0 +1,28 @@
+#languageSelectionMenu {
+  background-color: #242424;
+}
+
+#appTitle {
+  color: rgb(69, 134, 255);
+  font-size: 5vw;
+  font-weight: 900;
+  height: 20vh;
+}
+
+#languageSelectionArea {
+  height: 80vh;
+}
+
+.languageBox {
+  color: white;
+  width: 20vw;
+  height: 15vh;
+  border: 5px solid white;
+  border-radius: 20px;
+}
+
+.languageBox:hover {
+  background-color: white;
+  cursor: pointer;
+  color: #242424;
+}
