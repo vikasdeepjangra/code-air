@@ -5,7 +5,7 @@ import cors from "cors";
 import { compileAndRun } from "./controllers/CompileAndRun";
 import { healthChecks } from "./controllers/HealthCheck";
 const app = express();
-const port = 3300;
+const port = 80;
 
 app.use(
   cors({
