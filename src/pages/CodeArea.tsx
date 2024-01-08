@@ -68,7 +68,7 @@ function CodeArea() {
       sourceFileName,
       targetFileName,
     } = defaultConfig || {};
-    const response = await fetch("http://localhost:3300/compileAndRun", {
+    const response = await fetch("http://34.229.144.254:3300/compileAndRun", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
