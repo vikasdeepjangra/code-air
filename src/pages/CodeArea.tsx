@@ -59,7 +59,7 @@ function CodeArea() {
 
   const compileAndRun = async () => {
     setIsRunning(true);
-    setTerminalMessage((terminalMsg) => (terminalMsg = "Loading..."));
+    setTerminalMessage("Loading...");
     const code = editorRef.current?.getValue();
     const {
       language,
@@ -84,7 +84,7 @@ function CodeArea() {
     });
     const responseData = await response.json();
     console.log(responseData);
-    setTerminalMessage((terminalMsg) => (terminalMsg = responseData.message));
+    setTerminalMessage(responseData.message);
     setIsRunning(false);
   };
 
